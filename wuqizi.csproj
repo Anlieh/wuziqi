@@ -91,8 +91,8 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Chess.cs" />
-    <Compile Include="DBExec.cs" />
-    <Compile Include="DBService.cs" />
+    <Compile Include="SqlService.cs" />
+    <Compile Include="SqlController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -29,40 +29,46 @@ namespace wuqizi
         /// </summary>
         private void InitializeComponent()
         {
-            this.BoardDataGridView = new System.Windows.Forms.DataGridView();
-            this.ChessDataGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.BoardDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ChessDataGridView)).BeginInit();
+            this.cdgv = new System.Windows.Forms.DataGridView();
+            this.bdgv = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.cdgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgv)).BeginInit();
             this.SuspendLayout();
             // 
-            // BoardDataGridView
+            // cdgv
             // 
-            this.BoardDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.BoardDataGridView.Location = new System.Drawing.Point(349, 0);
-            this.BoardDataGridView.Name = "BoardDataGridView";
-            this.BoardDataGridView.RowHeadersWidth = 62;
-            this.BoardDataGridView.RowTemplate.Height = 30;
-            this.BoardDataGridView.Size = new System.Drawing.Size(1062, 853);
-            this.BoardDataGridView.TabIndex = 0;
+            this.cdgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cdgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cdgv.Location = new System.Drawing.Point(369, 0);
+            this.cdgv.Name = "cdgv";
+            this.cdgv.RowHeadersWidth = 62;
+            this.cdgv.RowTemplate.Height = 30;
+            this.cdgv.Size = new System.Drawing.Size(713, 745);
+            this.cdgv.TabIndex = 0;
             // 
-            // ChessDataGridView
+            // bdgv
             // 
-            this.ChessDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ChessDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.ChessDataGridView.Name = "ChessDataGridView";
-            this.ChessDataGridView.RowHeadersWidth = 62;
-            this.ChessDataGridView.RowTemplate.Height = 30;
-            this.ChessDataGridView.Size = new System.Drawing.Size(343, 853);
-            this.ChessDataGridView.TabIndex = 1;
+            this.bdgv.AllowUserToDeleteRows = false;
+            this.bdgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.bdgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bdgv.Location = new System.Drawing.Point(0, 0);
+            this.bdgv.Name = "bdgv";
+            this.bdgv.RowHeadersWidth = 62;
+            this.bdgv.RowTemplate.Height = 30;
+            this.bdgv.Size = new System.Drawing.Size(363, 745);
+            this.bdgv.TabIndex = 1;
             // 
             // QueryForm
             // 
-            this.ClientSize = new System.Drawing.Size(1411, 853);
-            this.Controls.Add(this.ChessDataGridView);
-            this.Controls.Add(this.BoardDataGridView);
+            this.ClientSize = new System.Drawing.Size(1078, 744);
+            this.Controls.Add(this.bdgv);
+            this.Controls.Add(this.cdgv);
             this.Name = "QueryForm";
-            ((System.ComponentModel.ISupportInitialize)(this.BoardDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ChessDataGridView)).EndInit();
+            this.Load += new System.EventHandler(this.QueryForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.cdgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -70,7 +76,7 @@ namespace wuqizi
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView BoardDataGridView;
-        private System.Windows.Forms.DataGridView ChessDataGridView;
+        private System.Windows.Forms.DataGridView cdgv;
+        private System.Windows.Forms.DataGridView bdgv;
     }
 }

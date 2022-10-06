@@ -39,7 +39,7 @@ namespace wuqizi
         {
             board = new Board(DateTime.Now);
             board.list.Clear();
-            DBService.Insert(board);
+            SqlController.Insert(board);
             boardPictureBox.Enabled = true;
         }
 
@@ -61,7 +61,7 @@ namespace wuqizi
             board.Add(chess);
             board.Draw(graphics);
 
-            DBService.Insert(chess);
+            SqlController.Insert(chess);
 
             boardPictureBox.Image = bitMap;
 
@@ -71,7 +71,7 @@ namespace wuqizi
                 boardPictureBox.Enabled = false;
 
                 // 更新对局情况：胜负等
-                DBService.UpDateBoard(board.Id, chess.Color, DateTime.Now, board.list.Count);
+                SqlController.UpDateBoard(board.Id, chess.Color, DateTime.Now, board.list.Count);
                 return;
             }
         }
