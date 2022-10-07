@@ -29,7 +29,7 @@ namespace wuqizi
             try
             {
                 sqlConn.Open();
-                Console.WriteLine("[Insert] 与数据库已建立连接");
+                Console.WriteLine("[Insert] 连接正常");
                 //往表内添加记录
                 MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
                 //执行sql添加语句    
@@ -47,16 +47,20 @@ namespace wuqizi
         }
 
 
-        public static MySqlDataReader QueryById(string sql)
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static int Update(string sql)
         {
             try
             {
                 sqlConn.Open();
-                Console.WriteLine("[QueryById] 与数据库已建立连接");
+                Console.WriteLine("[Update] 连接正常");
                 MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
-                // 读取结果
-                MySqlDataReader reader = cmd.ExecuteReader();
-                return reader;
+                int result = cmd.ExecuteNonQuery();
+                return result;
             }
             catch (MySqlException e)
             {
@@ -66,14 +70,38 @@ namespace wuqizi
             {
                 sqlConn.Close();
             }
-            return null;
+            return 0;
         }
+
+
+        public static int Delete(string sql)
+        {
+            try
+            {
+                sqlConn.Open();
+                Console.WriteLine("[Delete] 连接正常");
+                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
+                int result = cmd.ExecuteNonQuery();
+                return result;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+            return 0;
+        }
+
 
         public static DataSet FillDataSet(string sql)
         {
             try
             {
                 sqlConn.Open();
+                Console.WriteLine("[FillDataSet] 连接正常");
                 //创建适配器
                 MySqlDataAdapter msda = new MySqlDataAdapter(sql, sqlConn);
                 //创建数据集
@@ -92,6 +120,7 @@ namespace wuqizi
             return null;
         }
 
+             
         public static MySqlDataReader Query(string sql)
         {
             try
@@ -101,7 +130,7 @@ namespace wuqizi
                 MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
                 // 读取结果
                 MySqlDataReader read = cmd.ExecuteReader();
-                
+
                 return read;
             }
             catch (MySqlException e)
@@ -115,54 +144,7 @@ namespace wuqizi
             return null;
         }
 
-        public static int Update(string sql)
-        {
-            int result = 0;
-            try
-            {
-                sqlConn.Open();
-                Console.WriteLine("[Update] 与数据库已建立连接");
-
-                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
-
-                result = cmd.ExecuteNonQuery();
-            }
-            catch (MySqlException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                sqlConn.Close();
-            }
-            return result;
-        }
-
-
-        public static DataSet GetViewData(string sql)
-        {
-            System.Data.SqlClient.SqlConnection conn = null;
-            //创建DataSet对象
-            DataSet ds = new DataSet();
-            try
-            {
-                conn = new SqlConnection(DBCONNSTR);
-                conn.Open();
-                //创建SqlDataAdapter对象
-                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
-                //将查询结果填充到DataSet对象中
-                sda.Fill(ds);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return ds;
-        }
+     
     }
     
 }

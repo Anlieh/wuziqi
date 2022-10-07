@@ -47,31 +47,36 @@ namespace wuqizi
         {
             double i = Convert.ToDouble(e.X) / board.Grid;
             double j = Convert.ToDouble(e.Y) / board.Grid;
-
             Chess chess = new Chess((int)(Math.Round(i) * board.Grid),
                                 (int)(Math.Round(j) * board.Grid),
                                 (int)(0.45 * board.Grid),
                                 Color.Black,
                                 board.Id);
+
             if (board.Exists(chess))
             {
-                MessageBox.Show("不能在同一个位置添加棋子!");
+                MessageBox.Show("该位置已存在棋子!");
                 return;
             }
+
+            // 添加并绘制棋子
             board.Add(chess);
             board.Draw(graphics);
+            boardPictureBox.Image = bitMap;
 
             SqlController.Insert(chess);
 
-            boardPictureBox.Image = bitMap;
-
-            if(board.Win())
+            // 判断是否已有一方获胜
+            if (board.Win())
             {
-                MessageBox.Show(chess.Color.ToString() + "方获胜!");
+                string winColor = chess.Color.Equals(Color.Black) ? "Black" : "White";
+                MessageBox.Show(winColor + "方获胜!");
                 boardPictureBox.Enabled = false;
 
-                // 更新对局情况：胜负等
-                SqlController.UpDateBoard(board.Id, chess.Color, DateTime.Now, board.list.Count);
+                // 更新对局情况
+                // SqlController.UpDateBoard(board.Id, chess.Color, DateTime.Now, board.list.Count);
+                SqlController.UpDateBoard(board, winColor);
+                
                 return;
             }
         }
@@ -79,9 +84,10 @@ namespace wuqizi
 
         public void HuiqiBtnClick(object sender, EventArgs e)
         {
-            board.RemoveLast();
+            Chess last = board.RemoveLast();
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
+            SqlController.DeleteById("chess", last.Id);
         }
 
 

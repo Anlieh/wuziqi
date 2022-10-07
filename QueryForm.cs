@@ -37,9 +37,7 @@ namespace wuqizi
             cdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             bdgv.DataSource = SqlController.GetFilledDataSet("board").Tables[0];
-
             cdgv.DataSource = SqlController.GetFilledDataSet("chess").Tables[0];
-
 
             //// DataGridView_Chess 自动填充 DataGridView_Board 第一行对应棋子
             //int initId = Convert.ToInt32(bdgv.SelectedRows[0].Cells[0].Value); // 第一个单元格的数据

@@ -32,7 +32,7 @@ namespace wuziqi
         public Board(DateTime dateTime)
         {
             this.Id = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-            this.Grid = 80;
+            this.Grid = 60;
             this.Row = 20;
             this.Col = 20;
             this.Start = dateTime;
@@ -98,16 +98,19 @@ namespace wuziqi
 
 
         /// <summary>
-        /// 悔棋: 删除队列中的最后一个棋子
+        /// 悔棋: 返回中队列的最后一项并将其移除
         /// </summary>
-        public void RemoveLast()
+        public Chess RemoveLast()
         {
             if (list.Count == 0)
             {
                 MessageBox.Show("当前棋局已无棋子!");
-                return;
+                return null;
             }
-            list.RemoveAt(list.Count - 1);
+            int lastIndex = list.Count - 1;
+            Chess last = list[lastIndex];
+            list.RemoveAt(lastIndex);
+            return last;
         }
 
 
