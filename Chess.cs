@@ -12,7 +12,7 @@ namespace wuziqi
 	 */
     class Chess 
     {
-		public int Id { get; set; } // 毫秒级时间戳自动生成
+		public long Id { get; set; } // 毫秒级时间戳自动生成
 
 		public int X { get; set; } // 横坐标
 
@@ -28,14 +28,15 @@ namespace wuziqi
 
 		public Chess() { }
 
-		public Chess(int X, int Y, int R, Color Color, int BoardId)
+		public Chess(int X, int Y, int R, Color Color, DateTime nowTime, int BoardId)
 		{
-			this.Id = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+			// this.Id = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+			Id = (long)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
 			this.X = X;
 			this.Y = Y;
 			this.R = R;		
 			this.Color = Color;
-			this.Time = DateTime.Now;
+			this.Time = nowTime;
 			this.BoardId = BoardId;
 		}
 

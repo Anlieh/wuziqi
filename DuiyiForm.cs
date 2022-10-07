@@ -11,14 +11,14 @@ using wuziqi;
 
 namespace wuqizi
 {
-    public partial class MainForm : Form
+    public partial class DuiyiForm : Form
     {
         private Bitmap bitMap;
         private Graphics graphics;
         private Board board;
 
 
-        public MainForm()
+        public DuiyiForm()
         {
             InitializeComponent();
         }
@@ -39,7 +39,7 @@ namespace wuqizi
         {
             board = new Board(DateTime.Now);
             board.list.Clear();
-            SqlController.Insert(board);
+            MySqlController.Insert(board);
             boardPictureBox.Enabled = true;
         }
 
@@ -47,10 +47,12 @@ namespace wuqizi
         {
             double i = Convert.ToDouble(e.X) / board.Grid;
             double j = Convert.ToDouble(e.Y) / board.Grid;
+            DateTime nowTime = DateTime.Now;
             Chess chess = new Chess((int)(Math.Round(i) * board.Grid),
                                 (int)(Math.Round(j) * board.Grid),
                                 (int)(0.45 * board.Grid),
                                 Color.Black,
+                                nowTime,
                                 board.Id);
 
             if (board.Exists(chess))
@@ -64,7 +66,7 @@ namespace wuqizi
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
 
-            SqlController.Insert(chess);
+            MySqlController.Insert(chess);
 
             // 判断是否已有一方获胜
             if (board.Win())
@@ -72,11 +74,9 @@ namespace wuqizi
                 string winColor = chess.Color.Equals(Color.Black) ? "Black" : "White";
                 MessageBox.Show(winColor + "方获胜!");
                 boardPictureBox.Enabled = false;
-
-                // 更新对局情况
-                // SqlController.UpDateBoard(board.Id, chess.Color, DateTime.Now, board.list.Count);
-                SqlController.UpDateBoard(board, winColor);
-                
+                board.End = nowTime;
+                // 更新对弈结果
+                MySqlController.UpDateBoard(board, winColor);
                 return;
             }
         }
@@ -87,7 +87,7 @@ namespace wuqizi
             Chess last = board.RemoveLast();
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
-            SqlController.DeleteById("chess", last.Id);
+            MySqlController.DeleteById("chess", last.Id);
         }
 
 

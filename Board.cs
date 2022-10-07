@@ -235,31 +235,7 @@ namespace wuziqi
             return true;
         }
 
-
-        /// <summary>
-        /// 以该棋子为起点横向判断是否有连续的五个棋子
-        /// </summary>
-        public bool WinRow__(Chess chess)
-        {
-            int x = chess.X;
-            int y = chess.Y;
-            Color color = chess.Color;
-
-            for (int i = chess.X; i < x + 5; i++)
-            {
-                Chess item = this.Search(i, y);
-                if (item != null)
-                {
-                    if (item.Color != color)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-
+        
         /// <summary>
         /// 行
         /// </summary>

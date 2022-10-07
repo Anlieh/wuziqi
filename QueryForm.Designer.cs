@@ -43,8 +43,6 @@ namespace wuqizi
             // 
             // cdgv
             // 
-            this.cdgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("MesloLGS NF", 14F, System.Drawing.FontStyle.Bold);
@@ -56,6 +54,7 @@ namespace wuqizi
             this.cdgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cdgv.Location = new System.Drawing.Point(466, 0);
             this.cdgv.Name = "cdgv";
+            this.cdgv.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("MesloLGS NF", 14F, System.Drawing.FontStyle.Bold);
@@ -69,14 +68,12 @@ namespace wuqizi
             dataGridViewCellStyle3.Font = new System.Drawing.Font("MesloLGM NF", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cdgv.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.cdgv.RowTemplate.Height = 30;
-            this.cdgv.Size = new System.Drawing.Size(605, 740);
+            this.cdgv.Size = new System.Drawing.Size(605, 745);
             this.cdgv.TabIndex = 0;
             // 
             // bdgv
             // 
             this.bdgv.AllowUserToDeleteRows = false;
-            this.bdgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("MesloLGS NF", 14F, System.Drawing.FontStyle.Bold);
@@ -88,6 +85,7 @@ namespace wuqizi
             this.bdgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bdgv.Location = new System.Drawing.Point(0, 0);
             this.bdgv.Name = "bdgv";
+            this.bdgv.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("MesloLGS NF", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -101,13 +99,13 @@ namespace wuqizi
             dataGridViewCellStyle6.Font = new System.Drawing.Font("MesloLGM NF", 12F);
             this.bdgv.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.bdgv.RowTemplate.Height = 30;
-            this.bdgv.Size = new System.Drawing.Size(460, 740);
+            this.bdgv.Size = new System.Drawing.Size(460, 745);
             this.bdgv.TabIndex = 1;
             this.bdgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bdgv_CellClick);
             // 
             // QueryForm
             // 
-            this.ClientSize = new System.Drawing.Size(1076, 739);
+            this.ClientSize = new System.Drawing.Size(1078, 744);
             this.Controls.Add(this.bdgv);
             this.Controls.Add(this.cdgv);
             this.Name = "QueryForm";

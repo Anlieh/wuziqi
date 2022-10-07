@@ -1,7 +1,7 @@
 ﻿
 namespace wuqizi
 {
-    partial class MainForm
+    partial class DuiyiForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -37,10 +37,12 @@ namespace wuqizi
             // 
             // boardPictureBox
             // 
-            this.boardPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boardPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.boardPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boardPictureBox.Location = new System.Drawing.Point(38, 100);
             this.boardPictureBox.Name = "boardPictureBox";
-            this.boardPictureBox.Size = new System.Drawing.Size(1078, 744);
+            this.boardPictureBox.Size = new System.Drawing.Size(1100, 1100);
             this.boardPictureBox.TabIndex = 0;
             this.boardPictureBox.TabStop = false;
             this.boardPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BoardPictureBox_MouseClick);
@@ -48,7 +50,7 @@ namespace wuqizi
             // huiqi
             // 
             this.huiqi.Font = new System.Drawing.Font("宋体", 14F);
-            this.huiqi.Location = new System.Drawing.Point(753, 73);
+            this.huiqi.Location = new System.Drawing.Point(338, 24);
             this.huiqi.Name = "huiqi";
             this.huiqi.Size = new System.Drawing.Size(91, 54);
             this.huiqi.TabIndex = 1;
@@ -59,7 +61,7 @@ namespace wuqizi
             // oneMore
             // 
             this.oneMore.Font = new System.Drawing.Font("宋体", 14F);
-            this.oneMore.Location = new System.Drawing.Point(896, 73);
+            this.oneMore.Location = new System.Drawing.Point(662, 24);
             this.oneMore.Name = "oneMore";
             this.oneMore.Size = new System.Drawing.Size(145, 54);
             this.oneMore.TabIndex = 2;
@@ -67,13 +69,13 @@ namespace wuqizi
             this.oneMore.UseVisualStyleBackColor = true;
             this.oneMore.Click += new System.EventHandler(this.Reset);
             // 
-            // MainForm
+            // DuiyiForm
             // 
-            this.ClientSize = new System.Drawing.Size(1078, 744);
+            this.ClientSize = new System.Drawing.Size(1178, 1244);
             this.Controls.Add(this.oneMore);
             this.Controls.Add(this.huiqi);
             this.Controls.Add(this.boardPictureBox);
-            this.Name = "MainForm";
+            this.Name = "DuiyiForm";
             this.Load += new System.EventHandler(this.MainFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.boardPictureBox)).EndInit();
             this.ResumeLayout(false);

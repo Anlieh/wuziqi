@@ -36,8 +36,8 @@ namespace wuqizi
             bdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             cdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-            bdgv.DataSource = SqlController.GetFilledDataSet("board").Tables[0];
-            cdgv.DataSource = SqlController.GetFilledDataSet("chess").Tables[0];
+            bdgv.DataSource = MySqlController.GetFilledDataSet("board").Tables[0];
+            cdgv.DataSource = MySqlController.GetFilledDataSet("chess").Tables[0];
 
             //// DataGridView_Chess 自动填充 DataGridView_Board 第一行对应棋子
             //int initId = Convert.ToInt32(bdgv.SelectedRows[0].Cells[0].Value); // 第一个单元格的数据
@@ -51,7 +51,7 @@ namespace wuqizi
             int boardId = Convert.ToInt32(bdgv.Rows[index].Cells["id"].Value);
 
             // 查询棋子: 满足棋子id == board_id  
-            DataSet ds = SqlController.GetChessDataSetOnCondition(boardId);
+            DataSet ds = MySqlController.GetChessDataSetOnCondition(boardId);
             cdgv.DataSource = ds.Tables[0];
         }
 
