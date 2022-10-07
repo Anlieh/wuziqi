@@ -59,6 +59,7 @@ namespace wuqizi
             this.bdgv.RowTemplate.Height = 30;
             this.bdgv.Size = new System.Drawing.Size(363, 745);
             this.bdgv.TabIndex = 1;
+            this.bdgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bdgv_CellClick);
             // 
             // QueryForm
             // 

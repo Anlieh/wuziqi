@@ -14,19 +14,12 @@ namespace wuqizi
 {
     class SqlController
     {
-
         public static void Insert(Chess chess)
         {
             string color = chess.Color.Equals(Color.Black) ? "Black" : "White";
             string time = chess.Time.ToString("yy-MM-dd HH:mm:ss");
             string sql = $"insert into chess(id, x, y, r, color, time, board_id) values({chess.Id}, {chess.X}, {chess.Y}, {chess.R}, '{color}','{time}', {chess.BoardId})";
             SqlService.Insert(sql);
-        }
-
-        public static void QueryById(int id)
-        {
-            string sql = $"select * from chess where id={id}";
-            MySqlDataReader reader = SqlService.QueryById(sql);
         }
 
       
@@ -58,5 +51,13 @@ namespace wuqizi
             return ds;
         }
 
+        internal static DataSet GetChessDataSetOnCondition(int id)
+        {
+            string sql = $"select * from chess where board_id={id}";
+
+            DataSet ds = SqlService.FillDataSet(sql);
+
+            return ds;
+        }
     }
 }

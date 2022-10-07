@@ -22,6 +22,15 @@ namespace wuqizi
 
         private void QueryForm_Load(object sender, EventArgs e)
         {
+            // 去掉最左侧的空白列
+            bdgv.RowHeadersVisible = false;
+            cdgv.RowHeadersVisible = false;
+
+            // 列宽自适应
+            bdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            // cdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // 初始化数据
             bdgv.DataSource = SqlController.GetFilledDataSet("board").Tables[0];
             cdgv.DataSource = SqlController.GetFilledDataSet("chess").Tables[0];
 
@@ -37,6 +46,16 @@ namespace wuqizi
         {
             cdgv.DataSource = SqlController.GetFilledDataSet("chess").Tables[0];
 
+        }
+
+        private void bdgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = bdgv.CurrentRow.Index;    //取得选中行的索引  
+            int id = Convert.ToInt32(bdgv.Rows[index].Cells["id"].Value);
+
+            // 查询棋子: 满足border_id == id
+            DataSet ds = SqlController.GetChessDataSetOnCondition(id);
+            cdgv.DataSource = ds.Tables[0];
         }
 
     }
