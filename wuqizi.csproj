@@ -107,7 +107,7 @@
     <Compile Include="QueryForm.Designer.cs">
       <DependentUpon>QueryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerService.cs" />
+    <Compile Include="SqlServerExpress.cs" />
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>
     </Compile>

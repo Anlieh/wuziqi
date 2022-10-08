@@ -29,21 +29,21 @@ namespace wuqizi
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainBtn = new System.Windows.Forms.Button();
+            this.boardBtn = new System.Windows.Forms.Button();
             this.queryBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // mainBtn
+            // boardBtn
             // 
-            this.mainBtn.Font = new System.Drawing.Font("MesloLGM NF", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mainBtn.Location = new System.Drawing.Point(12, 236);
-            this.mainBtn.Name = "mainBtn";
-            this.mainBtn.Size = new System.Drawing.Size(50, 209);
-            this.mainBtn.TabIndex = 0;
-            this.mainBtn.Text = "下棋";
-            this.mainBtn.UseVisualStyleBackColor = true;
-            this.mainBtn.Click += new System.EventHandler(this.mainBtn_Click);
+            this.boardBtn.Font = new System.Drawing.Font("MesloLGM NF", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boardBtn.Location = new System.Drawing.Point(12, 236);
+            this.boardBtn.Name = "boardBtn";
+            this.boardBtn.Size = new System.Drawing.Size(50, 209);
+            this.boardBtn.TabIndex = 0;
+            this.boardBtn.Text = "下棋";
+            this.boardBtn.UseVisualStyleBackColor = true;
+            this.boardBtn.Click += new System.EventHandler(this.boardBtn_Click);
             // 
             // queryBtn
             // 
@@ -76,7 +76,7 @@ namespace wuqizi
             this.ClientSize = new System.Drawing.Size(1378, 1344);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.queryBtn);
-            this.Controls.Add(this.mainBtn);
+            this.Controls.Add(this.boardBtn);
             this.Name = "StartForm";
             this.Text = "StartForm";
             this.Load += new System.EventHandler(this.StartForm_Load);
@@ -87,7 +87,7 @@ namespace wuqizi
 
         #endregion
 
-        private System.Windows.Forms.Button mainBtn;
+        private System.Windows.Forms.Button boardBtn;
         private System.Windows.Forms.Button queryBtn;
         private System.Windows.Forms.Panel panel1;
     }

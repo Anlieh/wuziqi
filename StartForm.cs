@@ -30,10 +30,13 @@ namespace wuqizi
             {
                 queryForm = new QueryForm();
             }
+            
+            // 总觉得哪里怪怪的
+            boardBtn_Click(null, null);
 
         }
 
-        private void mainBtn_Click(object sender, EventArgs e)
+        private void boardBtn_Click(object sender, EventArgs e)
         {
             // 设置子窗口：不显示为顶级窗口
             duiyiForm.TopLevel = false;

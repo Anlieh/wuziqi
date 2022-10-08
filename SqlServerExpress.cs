@@ -1,21 +1,22 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using wuziqi;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace wuqizi
 {
-    class MySqlService
+    class SqlServerExpress
     {
-        public static string DBCONNSTR = "server=localhost; user=root; database=wuziqi; port=3306; password=root123";
+        //第一种连接: sql server的Windows身份验证
+        //string ConStr = "server=.;database=StudentStatusDB;Trusted_Connection=SSPI";
+       
+        //第二种连接: sql server身份验证
+        public static string connStr = "server=.;database= ;uid= ;pwd= ";
 
-        public static MySqlConnection sqlConn = new MySqlConnection(DBCONNSTR);
+        public static SqlConnection conn = new SqlConnection(connStr);
 
 
         /// <summary>
@@ -28,20 +29,20 @@ namespace wuqizi
             int result = 0;
             try
             {
-                sqlConn.Open();
-                Console.WriteLine("[Insert] MySQL连接正常");
+                conn.Open();
+                Console.WriteLine("[Insert] SqlServer连接正常");
                 //往表内添加记录
-                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 //执行sql添加语句    
                 result = cmd.ExecuteNonQuery();
-            } 
-            catch (MySqlException e)
-            {   
+            }
+            catch (SqlException e)
+            {
                 Console.WriteLine(e.Message);
             }
             finally
             {
-                sqlConn.Close();
+                conn.Close();
             }
             return result;
         }
@@ -56,19 +57,19 @@ namespace wuqizi
         {
             try
             {
-                sqlConn.Open();
-                Console.WriteLine("[Update] MySQL连接正常");
-                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
+                conn.Open();
+                Console.WriteLine("[Update] SqlServer连接正常");
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 int result = cmd.ExecuteNonQuery();
                 return result;
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
             }
             finally
             {
-                sqlConn.Close();
+                conn.Close();
             }
             return 0;
         }
@@ -78,19 +79,19 @@ namespace wuqizi
         {
             try
             {
-                sqlConn.Open();
-                Console.WriteLine("[Delete] MySQL连接正常");
-                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
+                conn.Open();
+                Console.WriteLine("[Delete] SqlServer连接正常");
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 int result = cmd.ExecuteNonQuery();
                 return result;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             finally
             {
-                sqlConn.Close();
+                conn.Close();
             }
             return 0;
         }
@@ -100,51 +101,49 @@ namespace wuqizi
         {
             try
             {
-                sqlConn.Open();
-                Console.WriteLine("[FillDataSet] MySQL连接正常");
+                conn.Open();
+                Console.WriteLine("[FillDataSet] SqlServer连接正常");
                 //创建适配器
-                MySqlDataAdapter msda = new MySqlDataAdapter(sql, sqlConn);
+                SqlDataAdapter msda = new SqlDataAdapter(sql, conn);
                 //创建数据集
                 DataSet ds = new DataSet();
                 msda.Fill(ds);
                 return ds;
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
             }
             finally
             {
-                sqlConn.Close();
+                conn.Close();
             }
             return null;
         }
 
-             
-        public static MySqlDataReader Query(string sql)
-        {
+
+        public static SqlDataReader Query(string sql)
+        {           
             try
             {
-                sqlConn.Open();
-                Console.WriteLine("[Query] MySQL连接正常");
-                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
+                conn.Open();
+                Console.WriteLine("[Query] SqlServer连接正常");
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 // 读取结果
-                MySqlDataReader read = cmd.ExecuteReader();
+                SqlDataReader read = cmd.ExecuteReader();
 
                 return read;
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
             }
             finally
             {
-                sqlConn.Close();
+                conn.Close();
             }
             return null;
         }
 
-     
     }
-    
 }
