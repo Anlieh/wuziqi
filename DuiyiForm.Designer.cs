@@ -30,8 +30,8 @@ namespace wuqizi
         private void InitializeComponent()
         {
             this.boardPictureBox = new System.Windows.Forms.PictureBox();
-            this.huiqi = new System.Windows.Forms.Button();
-            this.oneMore = new System.Windows.Forms.Button();
+            this.huiqiBtn = new System.Windows.Forms.Button();
+            this.resetBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.boardPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,33 +47,33 @@ namespace wuqizi
             this.boardPictureBox.TabStop = false;
             this.boardPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BoardPictureBox_MouseClick);
             // 
-            // huiqi
+            // huiqiBtn
             // 
-            this.huiqi.Font = new System.Drawing.Font("宋体", 14F);
-            this.huiqi.Location = new System.Drawing.Point(338, 24);
-            this.huiqi.Name = "huiqi";
-            this.huiqi.Size = new System.Drawing.Size(91, 54);
-            this.huiqi.TabIndex = 1;
-            this.huiqi.Text = "悔棋";
-            this.huiqi.UseVisualStyleBackColor = true;
-            this.huiqi.Click += new System.EventHandler(this.HuiqiBtnClick);
+            this.huiqiBtn.Font = new System.Drawing.Font("宋体", 14F);
+            this.huiqiBtn.Location = new System.Drawing.Point(338, 24);
+            this.huiqiBtn.Name = "huiqi";
+            this.huiqiBtn.Size = new System.Drawing.Size(91, 54);
+            this.huiqiBtn.TabIndex = 1;
+            this.huiqiBtn.Text = "悔棋";
+            this.huiqiBtn.UseVisualStyleBackColor = true;
+            this.huiqiBtn.Click += new System.EventHandler(this.HuiqiBtnClick);
             // 
-            // oneMore
+            // resetBtn
             // 
-            this.oneMore.Font = new System.Drawing.Font("宋体", 14F);
-            this.oneMore.Location = new System.Drawing.Point(662, 24);
-            this.oneMore.Name = "oneMore";
-            this.oneMore.Size = new System.Drawing.Size(145, 54);
-            this.oneMore.TabIndex = 2;
-            this.oneMore.Text = "再来一局";
-            this.oneMore.UseVisualStyleBackColor = true;
-            this.oneMore.Click += new System.EventHandler(this.Reset);
+            this.resetBtn.Font = new System.Drawing.Font("宋体", 14F);
+            this.resetBtn.Location = new System.Drawing.Point(662, 24);
+            this.resetBtn.Name = "oneMore";
+            this.resetBtn.Size = new System.Drawing.Size(145, 54);
+            this.resetBtn.TabIndex = 2;
+            this.resetBtn.Text = "再来一局";
+            this.resetBtn.UseVisualStyleBackColor = true;
+            this.resetBtn.Click += new System.EventHandler(this.Reset);
             // 
             // DuiyiForm
             // 
             this.ClientSize = new System.Drawing.Size(1178, 1244);
-            this.Controls.Add(this.oneMore);
-            this.Controls.Add(this.huiqi);
+            this.Controls.Add(this.resetBtn);
+            this.Controls.Add(this.huiqiBtn);
             this.Controls.Add(this.boardPictureBox);
             this.Name = "DuiyiForm";
             this.Load += new System.EventHandler(this.MainFormLoad);
@@ -84,12 +84,9 @@ namespace wuqizi
 
         #endregion
 
-        private System.Windows.Forms.PictureBox mainPictureBox;
-        private System.Windows.Forms.Button huiqiBtn;
-        private System.Windows.Forms.Button reset;
         private System.Windows.Forms.PictureBox boardPictureBox;
-        private System.Windows.Forms.Button huiqi;
-        private System.Windows.Forms.Button oneMore;
+        private System.Windows.Forms.Button huiqiBtn;
+        private System.Windows.Forms.Button resetBtn;
     }
 }
 

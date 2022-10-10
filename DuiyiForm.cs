@@ -17,7 +17,6 @@ namespace wuqizi
         private Graphics graphics;
         private Board board;
 
-
         public DuiyiForm()
         {
             InitializeComponent();
@@ -29,22 +28,75 @@ namespace wuqizi
             graphics = Graphics.FromImage(bitMap);
             graphics.Clear(color: Color.LightGray);
 
-            this.InitBoard();
-
+            // 获得上局对弈详情
+            this.board = this.GetLastBoard();
+            
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
+
+            // 不能修改上局信息
+            boardPictureBox.Enabled = false;
+            huiqiBtn.Enabled = false;
+            
         }
 
-        public void InitBoard()
+
+        /// <summary>
+        /// 构造新的棋局对象
+        /// </summary>
+        public void InitDuiyiForm()
         {
             board = new Board(DateTime.Now);
             board.list.Clear();
-            DBMySql.Insert(board);
             boardPictureBox.Enabled = true;
+            huiqiBtn.Enabled = true;
+
+            MySqlController.Insert(board);
+            //SqlServerController.Insert(board);
         }
 
+
+        /// <summary>
+        /// 确认是否开始新的一局
+        /// </summary>
+        private bool CheckForNew()
+        {
+            // 让用户选择点击
+            DialogResult result = MessageBox.Show("确认开始新的一局?", "确认你的选择",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // 判断是否确认
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// 查找上一局的对弈详情
+        /// </summary>
+        private Board GetLastBoard()
+        {
+            Board lastBoard = MySqlController.FindLastBoard();
+            lastBoard.Grid = 60;
+            lastBoard.Row = 10;
+            lastBoard.Col = 10;
+            int lastId = lastBoard.Id;
+            List<Chess> ts = MySqlController.FindLastAll(lastId);
+            lastBoard.list = ts;
+            return lastBoard;
+        }
+
+
+        /// <summary>
+        /// 棋盘表格点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoardPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
+            #region 添加并绘制棋子
             double i = Convert.ToDouble(e.X) / board.Grid;
             double j = Convert.ToDouble(e.Y) / board.Grid;
             DateTime nowTime = DateTime.Now;
@@ -60,13 +112,15 @@ namespace wuqizi
                 MessageBox.Show("该位置已存在棋子!");
                 return;
             }
-
-            // 添加并绘制棋子
+                        
             board.Add(chess);
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
 
-            DBMySql.Insert(chess);
+            MySqlController.Insert(chess);
+            //SqlServerController.Insert(chess);
+
+            #endregion
 
             // 判断是否已有一方获胜
             if (board.Win())
@@ -75,8 +129,11 @@ namespace wuqizi
                 MessageBox.Show(winColor + "方获胜!");
                 boardPictureBox.Enabled = false;
                 board.End = nowTime;
+
                 // 更新对弈结果
-                DBMySql.UpDateBoard(board, winColor);
+                MySqlController.UpDateBoard(board, winColor);
+                //SqlServerController.UpDateBoard(board, winColor);
+
                 return;
             }
         }
@@ -87,15 +144,20 @@ namespace wuqizi
             Chess last = board.RemoveLast();
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
-            DBMySql.DeleteById("chess", last.Id);
+            MySqlController.DeleteById("chess", last.Id);
         }
 
 
         public void Reset(object sender, EventArgs e)
         {
-            this.InitBoard();
-            board.Draw(graphics);
-            boardPictureBox.Image = bitMap;
+            if(CheckForNew())
+            {
+                this.InitDuiyiForm();
+                board.Draw(graphics);
+                boardPictureBox.Image = bitMap;
+                boardPictureBox.Enabled = true;
+            }
+            
         }
 
     }

@@ -1,9 +1,7 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,64 +12,62 @@ namespace wuqizi
 {
     public partial class QueryForm : Form
     {
-
         public QueryForm()
         {
             InitializeComponent();
         }
-
+      
         private void QueryForm_Load(object sender, EventArgs e)
         {
-            this.InitDataGridView();
-            this.SetDataGridViewStyle(); 
+            InitDataGridView();
+            SetDataGridViewStyle();
         }
+
 
         private void InitDataGridView()
         {
-            // bgdv: DataGridView of 棋局
-            // cdgv: DataGridView of 棋子
-            DataTable bdt = DBMySql.GetFilledDataSet("board").Tables[0];
-            bdgv.DataSource = bdt;
-            cdgv.DataSource = DBMySql.GetFilledDataSet("chess").Tables[0];
+            // lgdv: DataGridView of 棋局
+            // rdgv: DataGridView of 棋子
+            DataTable bdt = MySqlController.GetFilledDataSet("board").Tables[0];
+            ldgv.DataSource = bdt;
+            rdgv.DataSource = MySqlController.GetFilledDataSet("chess").Tables[0];
 
-            // cgdv 自动填充 bgdv 第一条记录对应的棋子
-            int initId = Convert.ToInt32(bdt.Rows[0][0]);
-            //int initId = Convert.ToInt32(bdgv.SelectedRows[0].Cells[0].Value); // 第一个单元格的数据
-            cdgv.DataSource = DBMySql.GetChessDataSetOnCondition(initId).Tables[0];
-
+            // cgdv 自动填充最后一局的对弈详情
+            int rowCount = bdt.Rows.Count;
+            ClickLdgv2Rdgv(rowCount - 1);
         }
 
-        
+
         private void SetDataGridViewStyle()
         {
-            //// 去掉最左侧的空白列
-            //bdgv.RowHeadersVisible = false;
-            //cdgv.RowHeadersVisible = false;
+            // 去掉最左侧的空白列
+            ldgv.RowHeadersVisible = false;
+            rdgv.RowHeadersVisible = false;
 
             // 列宽自适应
-            bdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            cdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            ldgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            rdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
 
 
-        private void bdgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ldgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = bdgv.CurrentRow.Index;    //取得选中行的索引  
-            // TODO: 更好的解决方法：判断 index 属于 [0, bgdv行总数 - 1]
-            try
-            {
-                int boardId = Convert.ToInt32(bdgv.Rows[index].Cells["id"].Value);
-                // 查询棋子: 满足棋子id == board_id  
-                DataSet ds = DBMySql.GetChessDataSetOnCondition(boardId);
-                cdgv.DataSource = ds.Tables[0];
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("[Error][bdgv_CellClick] " + ex.Message);
-            }
-           
+            int index = ldgv.CurrentRow.Index;    //取得选中行的索引  
+            ClickLdgv2Rdgv(index);
         }
 
+
+        private void ClickLdgv2Rdgv(int index)
+        {
+            int rowCount = ldgv.Rows.Count;
+            if(rowCount >= 1 && index < rowCount)
+            {
+                int boardId = Convert.ToInt32(ldgv.Rows[index].Cells["id"].Value);
+                // 查询棋子: 满足棋子id == board_id  
+                DataSet ds = MySqlController.GetChessDataSetByBoard(boardId);
+                rdgv.DataSource = ds.Tables[0];
+            }
+        }
     }
 }

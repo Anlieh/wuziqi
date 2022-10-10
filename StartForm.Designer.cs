@@ -78,7 +78,7 @@ namespace wuqizi
             this.Controls.Add(this.queryBtn);
             this.Controls.Add(this.boardBtn);
             this.Name = "StartForm";
-            this.Text = "StartForm";
+            this.Text = "五子棋";
             this.Load += new System.EventHandler(this.StartForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

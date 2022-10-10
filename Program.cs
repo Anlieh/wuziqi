@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using wuziqi;
 
 namespace wuqizi
 {
@@ -18,6 +19,8 @@ namespace wuqizi
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new DuiyiForm());
             Application.Run(new StartForm());
+            //Application.Run(new QueryForm());
+            //Application.Run(new LoginForm());
         }
     }
 }

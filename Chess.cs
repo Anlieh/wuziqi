@@ -40,10 +40,34 @@ namespace wuziqi
 			this.BoardId = BoardId;
 		}
 
-		// 绘制并填充棋子
-		public void Draw(Graphics g)
+        public Chess(long id, int x, int y, int r, Color color, DateTime time, int boardId)
+        {
+            Id = id;
+            X = x;
+            Y = y;
+            R = r;
+            Color = color;
+            Time = time;
+            BoardId = boardId;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+
+        // 显示棋子
+        public void Draw(Graphics g)
 		{
 			g.FillEllipse(new SolidBrush(Color), X - R, Y - R, 2 * R, 2 * R);
 		}
+
+
+        public bool ColorEquals(object obj)
+        {
+            return obj is Chess chess &&
+                  EqualityComparer<Color>.Default.Equals(Color, chess.Color);
+        }
     }
 }

@@ -11,7 +11,7 @@ using wuziqi;
 
 namespace wuqizi
 {
-    class DBController
+    static class DBMySql
     {
         public static string DBCONNSTR = "server=localhost; user=root; database=wuziqi; port=3306; password=root123";
 
@@ -144,7 +144,89 @@ namespace wuqizi
             return null;
         }
 
-     
+
+        /// <summary>
+        /// 查询 Board
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns>Board 对象</returns>
+        internal static Board QueryBoard(string sql)
+        {
+            try
+            {
+                sqlConn.Open();
+                Console.WriteLine("[QueryBoard] MySQL连接正常");
+                //往表内添加记录
+                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+               
+                        while(reader.Read())
+                        {
+                            int id = Convert.ToInt32(reader.GetInt32(0));
+                            DateTime startTime = Convert.ToDateTime(reader.GetDateTime(1));
+                            DateTime endTime = Convert.ToDateTime(reader.GetDateTime(2));
+                            string result = Convert.ToString(reader.GetString(3));
+                            int count = Convert.ToInt32(reader.GetInt32(4));
+                            Board board = new Board(id, startTime, endTime, result, count);
+                            return board;
+                        }
+                
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+            return null;
+        }
+
+
+
+        /// <summary>
+        /// 查询所有棋子
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        internal static List<Chess> GetChessByBoardId(string sql)
+        {
+            try
+            {
+                sqlConn.Open();
+                Console.WriteLine("[QueryChess] MySQL连接正常");
+                //往表内添加记录
+                MySqlCommand cmd = new MySqlCommand(sql, sqlConn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                List<Chess> list = new List<Chess>();
+              
+                        while (reader.Read())
+                        {
+                            long id = Convert.ToInt64(reader.GetInt64(0));
+                            int x = Convert.ToInt32(reader.GetInt32(1));
+                            int y = Convert.ToInt32(reader.GetInt32(2));
+                            int r = Convert.ToInt32(reader.GetInt32(3));
+                            string colorStr = Convert.ToString(reader.GetString(4));
+                            Color color = ModelConvertHelper<Color>.ConvertColor(colorStr);
+                            DateTime time = Convert.ToDateTime(reader.GetDateTime(5));
+                            int boardId = Convert.ToInt32(reader.GetInt32(6));
+                            Chess chees = new Chess(id, x, y, r, color, time, boardId);
+                            list.Add(chees);
+                        }
+                 
+                return list;
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+            return null;
+        }
     }
     
 }

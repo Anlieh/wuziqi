@@ -27,14 +27,17 @@ namespace wuziqi
         public DateTime End { get; set; }
 
         public List<Chess> list = new List<Chess>(); // 棋子列表
-
+        private DateTime startTime;
+        private DateTime endTime;
+        private string result;
+        private int count;
 
         public Board(DateTime dateTime)
         {
             this.Id = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
             this.Grid = 60;
-            this.Row = 20;
-            this.Col = 20;
+            this.Row = 10;
+            this.Col = 10;
             this.Start = dateTime;
         }
 
@@ -50,6 +53,15 @@ namespace wuziqi
             this.Row = Row;
             this.Col = Col;
             this.Start = DateTime.Now;
+        }
+
+        public Board(int id, DateTime startTime, DateTime endTime, string result, int count)
+        {
+            Id = id;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.result = result;
+            this.count = count;
         }
 
 
