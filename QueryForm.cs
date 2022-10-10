@@ -30,14 +30,14 @@ namespace wuqizi
         {
             // bgdv: DataGridView of 棋局
             // cdgv: DataGridView of 棋子
-            DataTable bdt = MySqlController.GetFilledDataSet("board").Tables[0];
+            DataTable bdt = DBMySql.GetFilledDataSet("board").Tables[0];
             bdgv.DataSource = bdt;
-            cdgv.DataSource = MySqlController.GetFilledDataSet("chess").Tables[0];
+            cdgv.DataSource = DBMySql.GetFilledDataSet("chess").Tables[0];
 
             // cgdv 自动填充 bgdv 第一条记录对应的棋子
             int initId = Convert.ToInt32(bdt.Rows[0][0]);
             //int initId = Convert.ToInt32(bdgv.SelectedRows[0].Cells[0].Value); // 第一个单元格的数据
-            cdgv.DataSource = MySqlController.GetChessDataSetOnCondition(initId).Tables[0];
+            cdgv.DataSource = DBMySql.GetChessDataSetOnCondition(initId).Tables[0];
 
         }
 
@@ -63,7 +63,7 @@ namespace wuqizi
             {
                 int boardId = Convert.ToInt32(bdgv.Rows[index].Cells["id"].Value);
                 // 查询棋子: 满足棋子id == board_id  
-                DataSet ds = MySqlController.GetChessDataSetOnCondition(boardId);
+                DataSet ds = DBMySql.GetChessDataSetOnCondition(boardId);
                 cdgv.DataSource = ds.Tables[0];
             }
             catch (Exception ex)

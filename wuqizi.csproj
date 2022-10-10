@@ -91,8 +91,8 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Chess.cs" />
-    <Compile Include="MySqlService.cs" />
-    <Compile Include="MySqlController.cs" />
+    <Compile Include="DBController.cs" />
+    <Compile Include="DBMySql.cs" />
     <Compile Include="DuiyiForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,7 +107,7 @@
     <Compile Include="QueryForm.Designer.cs">
       <DependentUpon>QueryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerExpress.cs" />
+    <Compile Include="DBSqlServer.cs" />
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>
     </Compile>

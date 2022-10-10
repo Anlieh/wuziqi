@@ -8,13 +8,13 @@ using System.Data;
 
 namespace wuqizi
 {
-    class SqlServerExpress
+    class DBSqlServer
     {
-        //第一种连接: sql server的Windows身份验证
-        //string ConStr = "server=.;database=StudentStatusDB;Trusted_Connection=SSPI";
+        //第一种连接: sql server 的 Windows 身份验证
+        //public string connStr = "server=.;database=DBName;Trusted_Connection=SSPI";
        
         //第二种连接: sql server身份验证
-        public static string connStr = "server=.;database= ;uid= ;pwd= ";
+        public static string connStr = "server=.;database=DBName;uid=userName;pwd=userPassword";
 
         public static SqlConnection conn = new SqlConnection(connStr);
 
@@ -51,8 +51,8 @@ namespace wuqizi
         /// <summary>
         /// 更新
         /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
+        /// <param name="sql">要执行的 sql 语句</param>
+        /// <returns>执行结果</returns>
         public static int Update(string sql)
         {
             try
@@ -96,7 +96,9 @@ namespace wuqizi
             return 0;
         }
 
-
+        /// <summary>
+        /// 返回一个填充的 DataSet 数据集
+        /// </summary>
         public static DataSet FillDataSet(string sql)
         {
             try

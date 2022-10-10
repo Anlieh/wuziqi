@@ -11,7 +11,7 @@ using wuziqi;
 
 namespace wuqizi
 {
-    class MySqlService
+    class DBController
     {
         public static string DBCONNSTR = "server=localhost; user=root; database=wuziqi; port=3306; password=root123";
 

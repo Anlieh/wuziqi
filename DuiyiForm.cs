@@ -39,7 +39,7 @@ namespace wuqizi
         {
             board = new Board(DateTime.Now);
             board.list.Clear();
-            MySqlController.Insert(board);
+            DBMySql.Insert(board);
             boardPictureBox.Enabled = true;
         }
 
@@ -66,7 +66,7 @@ namespace wuqizi
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
 
-            MySqlController.Insert(chess);
+            DBMySql.Insert(chess);
 
             // 判断是否已有一方获胜
             if (board.Win())
@@ -76,7 +76,7 @@ namespace wuqizi
                 boardPictureBox.Enabled = false;
                 board.End = nowTime;
                 // 更新对弈结果
-                MySqlController.UpDateBoard(board, winColor);
+                DBMySql.UpDateBoard(board, winColor);
                 return;
             }
         }
@@ -87,7 +87,7 @@ namespace wuqizi
             Chess last = board.RemoveLast();
             board.Draw(graphics);
             boardPictureBox.Image = bitMap;
-            MySqlController.DeleteById("chess", last.Id);
+            DBMySql.DeleteById("chess", last.Id);
         }
 
 

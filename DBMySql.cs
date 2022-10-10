@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 
 namespace wuqizi
 {
-    class MySqlController
+    class DBMySql
     {
         /// <summary>
         /// 向数据库中添加一条棋子的记录
@@ -22,7 +22,7 @@ namespace wuqizi
             string color = chess.Color.Equals(Color.Black) ? "Black" : "White";
             string time = chess.Time.ToString("yy-MM-dd HH:mm:ss");
             string sql = $"insert into chess(id, x, y, r, color, time, board_id) values({chess.Id}, {chess.X}, {chess.Y}, {chess.R}, '{color}','{time}', {chess.BoardId})";
-            MySqlService.Insert(sql);
+            DBController.Insert(sql);
         }
 
       
@@ -33,7 +33,7 @@ namespace wuqizi
         {
             string startTime = board.Start.ToString("yy-MM-dd HH:mm:ss");
             string sql = $"insert into board(id, start) values({board.Id}, '{startTime}')";
-            MySqlService.Insert(sql);
+            DBController.Insert(sql);
         }
 
 
@@ -44,7 +44,7 @@ namespace wuqizi
         internal static int DeleteChessById(long id)
         {
             string sql = $"delete from chess where id={id}";
-            int result = MySqlService.Delete(sql);
+            int result = DBController.Delete(sql);
             return result;
         }
 
@@ -52,7 +52,7 @@ namespace wuqizi
         internal static int DeleteById(string table, long id)
         {
             string sql = $"delete from {table} where id={id}";
-            int result = MySqlService.Delete(sql);
+            int result = DBController.Delete(sql);
             return result;
         }
 
@@ -69,7 +69,7 @@ namespace wuqizi
             string colorStr = color.Equals(Color.Black) ? "Black" : "White";
             string endTimeStr = end.ToString("yy-MM-dd HH:mm:ss");
             string sql = $"update board set end='{endTimeStr}', result='{colorStr}', count={count} where id={id}";
-            MySqlService.Update(sql);
+            DBController.Update(sql);
         }
 
 
@@ -80,7 +80,7 @@ namespace wuqizi
             string endStr = board.End.ToString("yy-MM-dd HH:mm:ss");
 
             string sql = $"update board set end='{endStr}', result='{result}', count={count} where id={id}";
-            MySqlService.Update(sql);
+            DBController.Update(sql);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace wuqizi
         public static DataSet GetFilledDataSet(string table)
         {
             string sql = $"select * from {table}";
-            DataSet ds = MySqlService.FillDataSet(sql);
+            DataSet ds = DBController.FillDataSet(sql);
             return ds;
         }
 
@@ -104,7 +104,7 @@ namespace wuqizi
         internal static DataSet GetChessDataSetOnCondition(int id)
         {
             string sql = $"select * from chess where board_id={id}";
-            DataSet ds = MySqlService.FillDataSet(sql);
+            DataSet ds = DBController.FillDataSet(sql);
             return ds;
         }
     }
